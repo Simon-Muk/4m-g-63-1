@@ -1,26 +1,53 @@
-from django.shortcuts import render
-from .models import Category, Product
+from django.shortcuts import render, redirect, get_object_or_404
+
+from .models import Questionnaire
+
+from .forms import QuestionnaireForm
 
 
-def categories_list(request):
-    categories = Category.objects.all()
-    return render(request, 'categories.html', {'categories': categories})
+def questionnaire_list(request):
+
+    data = Questionnaire.objects.all()
+
+    return render(request, 'list.html', {'data': data})
 
 
-def products_list(request):
-    products = Product.objects.all()
-    return render(request, 'products.html', {'products': products})
+def questionnaire_create(request):
+
+    form = QuestionnaireForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+
+        form.save()
+
+        return redirect('/questionnaires/')
+
+    return render(request, 'create.html', {'form': form})
 
 
-def category_products(request, category_id):
-    category = Category.objects.get(id=category_id)
-    products = Product.objects.filter(category=category)
+def questionnaire_update(request, id):
 
-    return render(
-        request,
-        'category_products.html',
-        {
-            'category': category,
-            'products': products
-        }
+    obj = get_object_or_404(Questionnaire, id=id)
+
+    form = QuestionnaireForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=obj
     )
+
+    if form.is_valid():
+
+        form.save()
+
+        return redirect('/questionnaires/')
+
+    return render(request, 'update.html', {'form': form})
+
+
+def questionnaire_delete(request, id):
+
+    obj = get_object_or_404(Questionnaire, id=id)
+
+    obj.delete()
+
+    return redirect('/questionnaires/')

@@ -1,22 +1,29 @@
 from django.db import models
 
-# Create your models here.
-class Category(models.Model):
-    name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
-    
+class Questionnaire(models.Model):
 
-class Product(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.IntegerField()
+    full_name = models.CharField(max_length=100)
 
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        related_name="products"
-    )
+    age = models.IntegerField()
 
-    def __str__(self):
-        return self.name
+    birth_date = models.DateField()
+
+    email = models.EmailField()
+
+    phone = models.CharField(max_length=20)
+
+    city = models.CharField(max_length=100)
+
+    hobby = models.TextField()
+
+    favorite_subject = models.CharField(max_length=100)
+
+    about_me = models.TextField()
+
+    photo = models.ImageField(upload_to='photos/')
+
+    document = models.FileField(upload_to='documents/')
+
+    def str(self):
+        return self.full_name
