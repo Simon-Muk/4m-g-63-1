@@ -1,0 +1,21 @@
+<h1>Список анкет</h1>
+
+<a href="/create/">Добавить анкету</a>
+
+<ul>
+
+{% for i in data %}
+
+<li>
+
+{{ i.full_name }}
+
+<a href="/update/{{ i.id }}/">Редактировать</a>
+
+<a href="/delete/{{ i.id }}/">Удалить</a>
+
+</li>
+
+{% endfor %}
+
+</ul>

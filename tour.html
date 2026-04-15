@@ -1,0 +1,25 @@
+<h1>Конный тур</h1>
+
+{% for person in persons %}
+
+<h2>Имя: {{ person.name }}</h2>
+
+<p>Местность: {{ person.location.name }}</p>
+
+<p>Категории:</p>
+<ul>
+    {% for category in person.location.categories.all %}
+        <li>{{ category.name }}</li>
+    {% endfor %}
+</ul>
+
+<p>Коментарии:</p>
+<ul>
+    {% for comment in person.location.comment_set.all %}
+        <li>{{ comment.text }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+{% endfor %}

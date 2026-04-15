@@ -1,0 +1,12 @@
+<h1>Список книг</h1>
+
+<u1>
+    {% for book in books %}
+        <li>
+            <a herf="/book/{{ book.id }}/">
+                {{ book.title }} - {{ book.author }}
+            </a>
+        </li>
+    {% endfor %}    
+
+</u1>
