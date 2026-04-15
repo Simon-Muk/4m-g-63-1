@@ -9,7 +9,7 @@ def questionnaire_list(request):
 
     data = Questionnaire.objects.all()
 
-    return render(request, 'list.html', {'data': data})
+    return render(request, 'questionnaire/list.html', {'data': data})
 
 
 def questionnaire_create(request):
@@ -22,7 +22,7 @@ def questionnaire_create(request):
 
         return redirect('/questionnaires/')
 
-    return render(request, 'create.html', {'form': form})
+    return render(request, 'questionnaire/create.html', {'form': form})
 
 
 def questionnaire_update(request, id):
@@ -41,7 +41,7 @@ def questionnaire_update(request, id):
 
         return redirect('/questionnaires/')
 
-    return render(request, 'update.html', {'form': form})
+    return render(request, 'questionnaire/update.html', {'form': form})
 
 
 def questionnaire_delete(request, id):
